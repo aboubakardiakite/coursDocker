@@ -1,0 +1,16 @@
+
+FROM alpine:latest
+
+# Installer git et bash
+RUN apk add --no-cache git bash
+
+WORKDIR /tmp/repo
+
+# Ajouter le script de pull et lui donner les permissions
+COPY ./git-pull.sh /usr/local/bin/git-pull.sh
+RUN chmod +x /usr/local/bin/git-pull.sh
+
+
+
+# Lancer le script pour surveiller les modifications et faire un pull
+CMD ["/usr/local/bin/git-pull.sh"]

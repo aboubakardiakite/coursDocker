@@ -1,0 +1,13 @@
+# Dockerfile.apache
+
+# Base image
+FROM httpd:2.4
+
+# Exposer le port 8080
+EXPOSE 8080
+
+# Remplacer le fichier httpd.conf pour ajuster les configurations
+RUN sed -i 's/Listen 80/Listen 8080/' /usr/local/apache2/conf/httpd.conf
+
+# Monter un volume pour /usr/local/apache2/htdocs
+VOLUME /usr/local/apache2/htdocs
