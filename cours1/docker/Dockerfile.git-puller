@@ -1,16 +1,14 @@
+FROM debian:bullseye-slim
 
-FROM alpine:latest
+RUN apt-get update && apt-get install -y git bash
 
-# Installer git et bash
-RUN apk add --no-cache git bash
 
+# Définir le répertoire de travail
 WORKDIR /tmp/repo
 
-# Ajouter le script de pull et lui donner les permissions
+# Copier le script de pull et lui donner les permissions
 COPY ./git-pull.sh /usr/local/bin/git-pull.sh
 RUN chmod +x /usr/local/bin/git-pull.sh
-
-
 
 # Lancer le script pour surveiller les modifications et faire un pull
 CMD ["/usr/local/bin/git-pull.sh"]

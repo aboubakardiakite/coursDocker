@@ -8,6 +8,7 @@ EXPOSE 8080
 
 # Remplacer le fichier httpd.conf pour ajuster les configurations
 RUN sed -i 's/Listen 80/Listen 8080/' /usr/local/apache2/conf/httpd.conf
+COPY index.html /usr/local/apache2/htdocs/
 
 # Monter un volume pour /usr/local/apache2/htdocs
 VOLUME /usr/local/apache2/htdocs
