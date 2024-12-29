@@ -1,0 +1,22 @@
+FROM python:3.9-slim
+
+# Installer les dépendances
+RUN apt-get update && apt-get install -y python3-pip && rm -rf /var/lib/apt/lists/*
+
+# Installer la bibliothèque watchdog pour surveiller les fichiers
+RUN pip install watchdog
+
+# Installer smtplib pour envoyer les emails
+RUN pip install yagmail
+
+# Ajouter le script Python au conteneur
+COPY notify_changes.py /app/notify_changes.py
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Exposer les fichiers surveillés
+VOLUME /shared
+
+# Lancer le script Python
+CMD ["python3", "/app/notify_changes.py"]
