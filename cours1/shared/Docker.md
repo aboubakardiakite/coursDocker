@@ -2,6 +2,22 @@
 
 Ces commandes doivent être exécutées dans le répertoire `docker`.
 
+### Utilisation de docker-compose
+
+Utilisez docker-compose pour simplifier le processus de création et de gestion des conteneurs.
+Pour cela, vous pouvez exécuter la commande suivante :
+
+```code
+docker-compose up -d
+```
+
+Pour arrêter les conteneurs, utilisez la commande :
+
+```code
+docker-compose down --volumes --rmi all
+```
+
+### Creations manuelles des conteneurs
 
 1- creer les images 
 

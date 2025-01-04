@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  apache-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.server
+    container_name: apache-server
+    ports:
+      - "8080:80"
+    volumes:
+      - shared_volume:/usr/local/apache2/htdocs
+    restart: always
+
+  git-sync:
+    build:
+      context: .
+      dockerfile: Dockerfile.git-puller
+    container_name: git-sync
+    environment:
+      - GITHUB_TOKEN=${GITHUB_TOKEN}
+    volumes:
+      - shared_volume:/shared
+    restart: always
+
+  smtp-notifier:
+    build:
+      context: .
+      dockerfile: Dockerfile.smtp
+    container_name: smtp-notifier
+    environment:
+      - TO_EMAIL=${TO_EMAIL}
+      - EMAIL_ADDRESS=${EMAIL_ADDRESS}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+    volumes:
+      - shared_volume:/shared
+    restart: always
+
+volumes:
+  shared_volume:
