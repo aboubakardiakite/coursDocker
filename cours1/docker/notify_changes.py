@@ -4,8 +4,8 @@ import yagmail
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-EMAIL_ADDRESS = "aboubakarsiriki060@gmail.com"
-EMAIL_PASSWORD = "fsiu tfqy ddrt ukwe"
+EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 TO_EMAIL = os.getenv("TO_EMAIL")
 
 if not EMAIL_ADDRESS or not EMAIL_PASSWORD or not TO_EMAIL:
